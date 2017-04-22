@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const HeaderLayout = () => {
   return (
       <div className="col-md-3 no-padding">
-        <Link to="/">Admin Site</Link>
+        <NavLink to="/">Admin Site</NavLink>
       </div>
   );
 }

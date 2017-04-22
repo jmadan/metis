@@ -13,7 +13,7 @@ pids
 
 # Coverage
 lib-cov
-.coverage
+coverage
 .nyc_output
 
 # node-waf configuration
