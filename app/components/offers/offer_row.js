@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 function formatDate(d){
-  return moment.unix(d).format("LLL");
+  return moment.unix(d).format("L");
 }
 
 const OfferRow = (props) => {
@@ -18,7 +18,7 @@ const OfferRow = (props) => {
     			<td>{offer.shortDescription}</td>
     			<td>{formatDate(offer.endsOn)}</td>
     			<td>
-    				<p><Link to={`offers/edit/${offer.offerId}`} className="btn btn-success btn-default active">Edit</Link></p>
+    				<p><Link to="#" onClick={props.editOffer.bind(null, offer)} className="btn btn-success btn-default active">Edit</Link></p>
     				<p><button className="btn btn-danger btn-default">Delete</button></p>
     			</td>
     		</tr>);

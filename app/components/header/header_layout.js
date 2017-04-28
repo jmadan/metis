@@ -6,7 +6,7 @@ import HeaderNav from './header_nav';
 
 const HeaderLayout = () => {
   return (
-    <div>
+    <div className="row">
       <HeaderLogo />
       <HeaderNav />
     </div>
