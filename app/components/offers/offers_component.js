@@ -33,14 +33,15 @@ const OffersComponent = (props) => {
 				<th>Actions</th>
 			</tr>
 			</thead>
-      {offersToBeDisplayed.length > 0 ? <OfferRow items={offersToBeDisplayed} /> : <tbody><tr><td colSpan="5">Found no Offers !!</td></tr></tbody>}
+      {offersToBeDisplayed.length > 0 ? <OfferRow items={offersToBeDisplayed} editOffer={props.formState}/> : <tbody><tr><td colSpan="5">No Offers to Display !!</td></tr></tbody>}
 			</table>
     </div>
   );
 }
 
 OffersComponent.propTypes = {
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
+  formState: PropTypes.func.isRequired
 }
 
 export default OffersComponent;

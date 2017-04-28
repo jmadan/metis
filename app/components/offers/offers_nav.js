@@ -14,6 +14,9 @@ const OffersNav = (props) => {
   		  <li role="presentation">
           <NavLink activeClassName="active" to="#" onClick={props.onClick.bind(null,'SHOW_EXPIRED')}>Expired Offers</NavLink>
         </li>
+        <li role="presentation">
+          <NavLink activeClassName="active" to="offers/offer/new">Create New Offer</NavLink>
+        </li>
 		  </ul>
   	</div>
   );
