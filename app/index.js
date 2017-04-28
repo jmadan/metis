@@ -1,27 +1,47 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-// const Router = ReactRouter.;
-// const Route = ReactRouter.Route;
+import * as Api from './utils/api';
+import offersList from './data/offers';
 
 // import components
 import Home from './components/home';
 import HeaderLayout from './components/header/header_layout';
 import OffersContainer from './containers/offers_container';
+import OfferNewContainer from './containers/offer_new_container';
 
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      offersList: null
+    }
+  }
+
+  componentDidMount(){
+    this.setState(() => {
+      return ({
+        offersList: Api.fetchData()
+        })
+      });
   }
 
   render(){
+    console.log(this.state);
     return (
       <Router>
         <div className="container">
           <HeaderLayout />
-          <Route exact path="/" component={Home} />
-          <Route path="/offers" component={OffersContainer} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/offers" component={OffersContainer} />
+            <Route exact path="/offers/offer/new" component={OfferNewContainer} />
+            <Route render={()=>{
+              return (<p>What you looking for is not here.</p>)
+            }} />
+          </Switch>
         </div>
       </Router>
     );
