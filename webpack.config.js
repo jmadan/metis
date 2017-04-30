@@ -40,5 +40,11 @@ module.exports = {
       template: './app/views/layout.html'
     }),
     new ExtractTextPlugin('style.css')
-  ]
+  ],
+  node: {
+    fs: "empty",
+    net: "empty",
+    tls: "empty",
+    module: "empty"
+  }
 };

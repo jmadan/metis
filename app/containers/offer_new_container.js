@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import offersList from '../data/offers';
+import moment from 'moment';
+
 import * as Api from '../utils/api';
 
 class OfferNewContainer extends Component {
@@ -23,21 +25,26 @@ class OfferNewContainer extends Component {
   handleChange(e) {
     let newState={};
     newState[e.target.name] = e.target.value;
+
     this.setState(function(){
-      return newState;
+      return Object.assign({}, this.state, newState);
     });
 
   }
 
   handleSubmit(e){
     e.preventDefault();
-    Api.addData(this.state);
+    Api.addOffer(this.state).then((res) => {
+      console.log(res);
+    });
     //need to handle the form submission
   }
 
   render(){
     return (
       <div className="container">
+          <h2><p className="text-center">Create New Offer</p></h2>
+        <br/>
         <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title </label>

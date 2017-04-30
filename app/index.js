@@ -10,6 +10,7 @@ import Home from './components/home';
 import HeaderLayout from './components/header/header_layout';
 import OffersContainer from './containers/offers_container';
 import OfferNewContainer from './containers/offer_new_container';
+import OfferEditContainer from './containers/offer_edit_container';
 
 class App extends Component {
   constructor(props) {
@@ -38,8 +39,9 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/offers" component={OffersContainer} />
             <Route exact path="/offers/offer/new" component={OfferNewContainer} />
+            <Route exact path="/offers/offer/edit/:id" component={OfferEditContainer} />
             <Route render={()=>{
-              return (<p>What you looking for is not here.</p>)
+              return (<p className="text-center">What you looking for is not here.</p>)
             }} />
           </Switch>
         </div>
