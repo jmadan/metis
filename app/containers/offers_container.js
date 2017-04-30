@@ -16,15 +16,12 @@ class OffersContainer extends Component {
 
     this.state = {
       selectedFilter: 'SHOW_ALL',
-      offers: [],
+      offers: null,
       toggleModal: false
     }
 
     this.updateOffers = this.updateOffers.bind(this);
-    // this.formState = this.formState.bind(this);
     this.offerForm = this.offerForm.bind(this);
-    this.handleForm = this.handleForm.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount(){
@@ -32,23 +29,18 @@ class OffersContainer extends Component {
   }
 
   updateOffers(filter){
-    console.log(filter);
-    this.setState(function(){
-      return {
-        selectedFilter: filter,
-        offers: offersList.content
-      };
+    Api.fetchOffers().then((offers) => {
+      this.setState(function(){
+        return {
+          selectedFilter: filter,
+          offers: offers.data
+        };
+      });
     });
   }
 
   offerForm(offer){
     console.log("offerToEdit : ", offer);
-  }
-
-  toggleModal(toggleModal){
-    this.setState(()=>{
-      return Object.assign({}, ...this.state, {toggleModal: toggleModal})
-    });
   }
 
   render(){
@@ -57,7 +49,7 @@ class OffersContainer extends Component {
       <div className="row">
         <OffersNav onClick={this.updateOffers}/>
         <br/>
-        {!this.state.offers ? <p>Need to get some Offers</p> : <OffersComponent {...this.state} formState={this.toggleModal}/>}
+        {!this.state.offers ? <p className="text-center">LOADING...</p> : <OffersComponent {...this.state} />}
       </div>
     )
   }
