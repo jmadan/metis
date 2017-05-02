@@ -7,17 +7,18 @@ import OfferRow from './offer_row';
 
 const OffersComponent = (props) => {
   let offersToBeDisplayed = [];
+
   switch(props.selectedFilter)
   {
     case "SHOW_ACTIVE":
-      offersToBeDisplayed = props.offers.filter((f) => { return moment.unix(f.endsOn).isAfter(moment())});
+      offersToBeDisplayed = props.offersList.filter((f) => { return moment.unix(f.endsOn).isAfter(moment())});
       break;
     case "SHOW_EXPIRED":
-      offersToBeDisplayed = props.offers.filter((f) => { return moment.unix(f.endsOn).isBefore(moment())});
+      offersToBeDisplayed = props.offersList.filter((f) => { return moment.unix(f.endsOn).isBefore(moment())});
       break;
     case "SHOW_ALL":
     default:
-      offersToBeDisplayed = props.offers;
+      offersToBeDisplayed = props.offersList;
       break;
   }
 
@@ -40,7 +41,8 @@ const OffersComponent = (props) => {
 }
 
 OffersComponent.propTypes = {
-  offers: PropTypes.array.isRequired
+  offersList: PropTypes.array.isRequired,
+  selectedFilter: PropTypes.string.isRequired
 }
 
 export default OffersComponent;

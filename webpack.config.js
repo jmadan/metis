@@ -1,4 +1,5 @@
 const PATH = require('path');
+const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -39,7 +40,8 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: './app/views/layout.html'
     }),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('style.css'),
+    new webpack.EnvironmentPlugin(['MONGOAPI'])
   ],
   node: {
     fs: "empty",

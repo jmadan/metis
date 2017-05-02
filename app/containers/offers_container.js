@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import OffersNav from '../components/offers/offers_nav';
 import OffersComponent from '../components/offers/offers_component';
 import OfferFormComponent from '../components/offers/offer_form';
-import ModalComponent from '../components/modal_component';
 
 import * as Api from '../utils/api';
 import offersList from '../data/offers';
@@ -29,13 +28,18 @@ class OffersContainer extends Component {
   }
 
   updateOffers(filter){
-    Api.fetchOffers().then((offers) => {
-      this.setState(function(){
-        return {
-          selectedFilter: filter,
-          offers: offers.data
-        };
+    if(filter === 'SHOW_ALL'){
+      Api.fetchOffers().then((offers) => {
+        this.setState(function(){
+          return {
+            selectedFilter: filter,
+            offers: offers.data
+          };
+        });
       });
+    }
+    this.setState(function(){
+      return {...this.state, selectedFilter: filter};
     });
   }
 
@@ -49,7 +53,7 @@ class OffersContainer extends Component {
       <div className="row">
         <OffersNav onClick={this.updateOffers}/>
         <br/>
-        {!this.state.offers ? <p className="text-center">LOADING...</p> : <OffersComponent {...this.state} />}
+        {!this.state.offers ? <p className="text-center">LOADING...</p> : <OffersComponent offersList={this.state.offers} selectedFilter={this.state.selectedFilter}/>}
       </div>
     )
   }
