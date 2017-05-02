@@ -11,9 +11,9 @@ const OfferRow = (props) => {
 
   return (
     <tbody>
-      {props.items.map((offer) => {
+      {props.items.map((offer, index) => {
 
-        return (<tr key={offer._id.$oid}>
+        return (<tr key={index}>
     			<td><img src={`https://s3-ap-southeast-1.amazonaws.com/images/outlets/offers/${offer._id.$oid}.png`} alt="..." className="img-thumbnail" /></td>
     			<td>{offer.title}</td>
     			<td>{offer.shortDescription}</td>
