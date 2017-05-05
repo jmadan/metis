@@ -19,7 +19,6 @@ class OffersContainer extends Component {
     }
 
     this.updateOffers = this.updateOffers.bind(this);
-    this.offerForm = this.offerForm.bind(this);
     this.deleteOffer = this.deleteOffer.bind(this);
   }
 
@@ -49,10 +48,6 @@ class OffersContainer extends Component {
         this.updateOffers("SHOW_ALL");
       }
     });
-  }
-
-  offerForm(offer){
-    console.log("offerToEdit : ", offer);
   }
 
   render(){
