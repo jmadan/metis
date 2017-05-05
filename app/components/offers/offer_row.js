@@ -20,7 +20,7 @@ const OfferRow = (props) => {
     			<td>{formatDate(offer.endsOn)}</td>
     			<td>
     				<p><Link to={`/offers/offer/edit/${offer.offerId}`} className="btn btn-success btn-default active">Edit</Link></p>
-    				<p><button className="btn btn-danger btn-default">Delete</button></p>
+    				<p><button className="btn btn-danger btn-default" onClick={()=>{props.onDelete(offer)}}>Delete</button></p>
     			</td>
     		</tr>);
       })}
@@ -29,7 +29,8 @@ const OfferRow = (props) => {
 }
 
 OfferRow.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired
 }
 
 export default OfferRow;
