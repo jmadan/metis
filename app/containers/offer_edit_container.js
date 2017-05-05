@@ -18,7 +18,7 @@ class OfferNewContainer extends Component {
         title: '',
         startsOn: '',
         endsOn: '',
-        type: ''
+        offer_type: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,7 +36,7 @@ class OfferNewContainer extends Component {
               title: offer.data.title,
               startsOn: offer.data.startsOn,
               endsOn: offer.data.endsOn,
-              type: offer.data.type
+              offer_type: offer.data.offer_type
             };
           });
     });
@@ -69,7 +69,7 @@ class OfferNewContainer extends Component {
             title: res.data.title,
             startsOn: res.data.startsOn,
             endsOn: res.data.endsOn,
-            type: res.data.type
+            offer_type: res.data.offer_type
           };
         });
       }
@@ -103,8 +103,8 @@ class OfferNewContainer extends Component {
           <input name="endsOn" type="text" className="form-control" onChange={this.handleChange} value={moment.unix(this.state.endsOn).format('L')} />
         </div>
         <div className="form-group">
-          <label htmlFor="type">Type of Offer </label>
-          <input name="type" type="text" className="form-control" onChange={this.handleChange} value={this.state.type} />
+          <label htmlFor="offer_type">Type of Offer </label>
+          <input name="offer_type" type="text" className="form-control" onChange={this.handleChange} value={this.state.offer_type} />
         </div>
         <div>
           <button className='btn btn-success btn-lg' type="submit"> Submit </button>
