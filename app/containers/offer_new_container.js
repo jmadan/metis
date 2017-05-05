@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import offersList from '../data/offers';
 import moment from 'moment';
+import uuid from 'uuid/v4';
 
 import * as Api from '../utils/api';
 
@@ -11,12 +12,13 @@ class OfferNewContainer extends Component {
     console.log("props: ", props);
 
     this.state = {
+        offerId: uuid(),
         longDescription: '',
         shortDescription: '',
         title: '',
         startsOn: '',
         endsOn: '',
-        type: ''
+        offer_type: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,9 +37,10 @@ class OfferNewContainer extends Component {
   handleSubmit(e){
     e.preventDefault();
     Api.addOffer(this.state).then((res) => {
-      console.log(res);
+      if(res.status === '200'){
+        this.props.history.location({pathname: '/offers'});
+      }
     });
-    //need to handle the form submission
   }
 
   render(){
@@ -67,8 +70,8 @@ class OfferNewContainer extends Component {
           <input name="endsOn" type="text" className="form-control" onChange={this.handleChange} value={this.state.endsOn} />
         </div>
         <div className="form-group">
-          <label htmlFor="type">Type of Offer </label>
-          <input name="type" type="text" className="form-control" onChange={this.handleChange} value={this.state.type} />
+          <label htmlFor="offer_type">Type of Offer </label>
+          <input name="offer_type" type="text" className="form-control" onChange={this.handleChange} value={this.state.offer_type} />
         </div>
         <div>
           <button className='btn btn-success btn-lg' type="submit"> Submit </button>
