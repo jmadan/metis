@@ -21,7 +21,7 @@ export const addOffer = (offer) => {
       endsOn: moment(offer.endsOn, "MM/DD/YYYY HH:mm:ss").unix()
     })
   const url = HOST+"/"+PATH+"/"+DATABASE+"/collections/offers?apiKey="+APIKEY;
-  return axios.post(url, offer).then((res) => {
+  return axios.post(url, newOffer).then((res) => {
     return res;
   }).catch((error) => {
     console.error(error);
