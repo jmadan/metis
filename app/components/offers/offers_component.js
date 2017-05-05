@@ -34,7 +34,7 @@ const OffersComponent = (props) => {
 				<th>Actions</th>
 			</tr>
 			</thead>
-      {offersToBeDisplayed.length > 0 ? <OfferRow items={offersToBeDisplayed} /> : <tbody><tr><td colSpan="5"><p className="text-center">No Offers to Display !!</p></td></tr></tbody>}
+      {offersToBeDisplayed.length > 0 ? <OfferRow items={offersToBeDisplayed} onDelete={props.onDelete}/> : <tbody><tr><td colSpan="5"><p className="text-center">No Offers to Display !!</p></td></tr></tbody>}
 			</table>
     </div>
   );
@@ -42,7 +42,8 @@ const OffersComponent = (props) => {
 
 OffersComponent.propTypes = {
   offersList: PropTypes.array.isRequired,
-  selectedFilter: PropTypes.string.isRequired
+  selectedFilter: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired
 }
 
 export default OffersComponent;
