@@ -15,12 +15,12 @@ class OffersContainer extends Component {
 
     this.state = {
       selectedFilter: 'SHOW_ALL',
-      offers: null,
-      toggleModal: false
+      offers: null
     }
 
     this.updateOffers = this.updateOffers.bind(this);
     this.offerForm = this.offerForm.bind(this);
+    this.deleteOffer = this.deleteOffer.bind(this);
   }
 
   componentDidMount(){
@@ -43,6 +43,14 @@ class OffersContainer extends Component {
     });
   }
 
+  deleteOffer(offer){
+    Api.deleteOffer(offer).then((res)=>{
+      if(res.status === 200 && res.statusText === "OK"){
+        this.updateOffers("SHOW_ALL");
+      }
+    });
+  }
+
   offerForm(offer){
     console.log("offerToEdit : ", offer);
   }
@@ -53,7 +61,7 @@ class OffersContainer extends Component {
       <div className="row">
         <OffersNav onClick={this.updateOffers}/>
         <br/>
-        {!this.state.offers ? <p className="text-center">LOADING...</p> : <OffersComponent offersList={this.state.offers} selectedFilter={this.state.selectedFilter}/>}
+        {!this.state.offers ? <p className="text-center">LOADING...</p> : <OffersComponent offersList={this.state.offers} selectedFilter={this.state.selectedFilter} onDelete={this.deleteOffer}/>}
       </div>
     )
   }
