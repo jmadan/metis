@@ -19,14 +19,13 @@ class App extends Component {
     this.state = {
       offersList: null
     }
+    this.updateAppOfferList = this.updateAppOfferList.bind(this);
   }
 
-  componentDidMount(){
-    this.setState(() => {
-      return ({
-        offersList: Api.fetchData()
-        })
-      });
+  updateAppOfferList(offers){
+    this.setState((offers) => {
+      return {...this.state, offersList: offers}
+    })
   }
 
   render(){
@@ -41,7 +40,12 @@ class App extends Component {
             <Route exact path="/offers/offer/new" component={OfferNewContainer} />
             <Route exact path="/offers/offer/edit/:id" component={OfferEditContainer} />
             <Route render={()=>{
-              return (<p className="text-center">What you looking for is not here.</p>)
+              return (<div className="container">
+                        <br/><br/><br/>
+                        <div className="jumbotron">
+                          <h1>What you looking for exists in ALTERNATE WORLD!</h1>
+                        </div>
+                      </div>)
             }} />
           </Switch>
         </div>
