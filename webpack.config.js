@@ -3,8 +3,9 @@ const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-let pathsToClean = ['build/']
+let pathsToClean = ['build']
 
 // the clean options to use
 let cleanOptions = {
@@ -22,8 +23,8 @@ let config = {
   },
   module: {
     rules: [
-      { test: /\.(js)$/, use: 'babel-loader' },
-      { test: /\.css$/, use: ExtractTextPlugin.extract({use: 'css-loader'})},
+      {test: /\.(js)$/, use: [{loader: 'babel-loader', query: {compact: false}}] },
+      {test: /\.css$/, use: ExtractTextPlugin.extract({use: 'css-loader'})},
       {test: /\.(png|jpg|gif)$/, loader: "url?limit=25000"},
 			{test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'},
       {test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000'},
@@ -32,14 +33,17 @@ let config = {
     ]
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    contentBase: PATH.join(__dirname, "build"),
+    compress: true
   },
   plugins: [
-    new CleanWebpackPlugin(pathsToClean, cleanOptions),
+    new CleanWebpackPlugin(['build'], {root: PATH.join(__dirname), verbose: true, dry: false}),
     new HTMLWebpackPlugin({
       template: './app/views/layout.html'
     }),
     new ExtractTextPlugin('style.css'),
+    new CopyWebpackPlugin([{from: PATH.join(__dirname, 'app/static'), to:PATH.join(__dirname, 'build')}], {copyUnmodified: true}),
     new webpack.EnvironmentPlugin(['MONGOAPI'])
   ],
   node: {
