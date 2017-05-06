@@ -5,15 +5,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-let pathsToClean = ['build']
-
-// the clean options to use
-let cleanOptions = {
-  root:     '/',
-  verbose:  true,
-  dry:      false
-}
-
 let config = {
   entry: './app/index.js',
   output: {
@@ -38,7 +29,7 @@ let config = {
     compress: true
   },
   plugins: [
-    new CleanWebpackPlugin(['build'], {root: PATH.join(__dirname), verbose: true, dry: false}),
+    new CleanWebpackPlugin(['build'], {root: PATH.resolve(__dirname,'../'), verbose: true, dry: false}),
     new HTMLWebpackPlugin({
       template: './app/views/layout.html'
     }),
@@ -58,7 +49,8 @@ if(process.env.NODE_ENV === 'production'){
   config.plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'PORT': JSON.stringify(process.env.PORT)
       }
     }),
     new webpack.optimize.UglifyJsPlugin()
